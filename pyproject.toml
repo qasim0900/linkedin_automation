@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "socialmedia"
+name = "linkedin_automation"
 version = "0.1.0"
 description = ""
-authors = ["QasimTylex <mohammad.qasim@tylextech.com>"]
+authors = ["qasim0900 <qasim_kamran2007@yahoo.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
