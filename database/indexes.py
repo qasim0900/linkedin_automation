@@ -1,46 +1,32 @@
 import logging
 from pymongo import ASCENDING, DESCENDING
 
-# --------------------------------
-# :: Logger Variable
-# --------------------------------
-
-""" 
-Logger for the bot module. This logger will be used to log important events, warnings,
-and errors related to the bot's operation.
-"""
 
 logger = logging.getLogger(__name__)
 
 
-# --------------------------------
-# :: Ensure Indexes Function
-# --------------------------------
-
-""" 
-Function to ensure that all necessary indexes are created on the MongoDB collections.
-"""
-
-
 def ensure_indexes(db, cfg):
-    _profiles_indexes(db[cfg.PROFILES_COLLECTION])
-    _connections_indexes(db[cfg.CONNECTIONS_COLLECTION])
-    _messages_indexes(db[cfg.MESSAGES_COLLECTION])
+    """
+    Create or verify all required MongoDB indexes.
+    Covers both the legacy single-collection layout and the four
+    region-specific collections introduced in the updated configuration.
+    """
+    # --- Region-specific Google-scraped profile collections -----------
+    _profiles_indexes(db[cfg.USA_COLLECTION])
+    _profiles_indexes(db[cfg.LAHORE_COLLECTION])
+
+    # --- Region-specific LinkedIn connection/message collections ------
+    _connections_indexes(db[cfg.USA_MESSAGE_COLLECTION])
+    _connections_indexes(db[cfg.LAHORE_MESSAGE_COLLECTION])
+
+    # --- Shared activity log ------------------------------------------
     _activity_indexes(db[cfg.ACTIVITY_LOG_COLLECTION])
+
     logger.info("All database indexes verified / created")
 
 
-# --------------------------------
-# :: Profile Indexes Function
-# --------------------------------
-
-""" 
-Function to create indexes for the profiles collection. This function will be called by the ensure_indexes 
-function to set up the necessary indexes for efficient querying of profile data.
-"""
-
-
 def _profiles_indexes(col):
+    """Indexes for Google-scraped profile collections."""
     col.create_index([("href", ASCENDING)], unique=True, name="href_unique")
     col.create_index([("processed", ASCENDING)], name="idx_processed")
     col.create_index([("connected", ASCENDING)], name="idx_connected")
@@ -50,49 +36,17 @@ def _profiles_indexes(col):
     col.create_index([("source", ASCENDING)], name="idx_source")
 
 
-# --------------------------------
-# :: Connections Indexes Function
-# --------------------------------
-
-""" 
-Function to create indexes for the connections collection. This function will be called by the ensure_indexes 
-function to set up the necessary indexes for efficient querying of connection data.
-"""
-
-
 def _connections_indexes(col):
+    """Indexes for LinkedIn connection/message target collections."""
     col.create_index([("href", ASCENDING)], unique=True, name="href_unique")
     col.create_index([("connected", ASCENDING)], name="idx_connected")
     col.create_index([("connection_date", DESCENDING)], name="idx_connection_date")
-
-
-# --------------------------------
-# :: Messages Indexes Function
-# --------------------------------
-
-""" 
-Function to create indexes for the messages collection. This function will be called by the ensure_indexes 
-function to set up the necessary indexes for efficient querying of message data.
-"""
-
-
-def _messages_indexes(col):
-    col.create_index([("href", ASCENDING)], unique=True, name="href_unique")
     col.create_index([("messaged", ASCENDING)], name="idx_messaged")
     col.create_index([("message_date", DESCENDING)], name="idx_message_date")
 
 
-# --------------------------------
-# :: Activity Log Indexes Function
-# --------------------------------
-
-""" 
-Function to create indexes for the activity log collection. This function will be called by the ensure_indexes 
-function to set up the necessary indexes for efficient querying of activity log data.
-"""
-
-
 def _activity_indexes(col):
+    """Indexes for the shared activity log collection."""
     col.create_index([("timestamp", DESCENDING)], name="idx_timestamp")
     col.create_index([("action_type", ASCENDING)], name="idx_action_type")
     col.create_index([("profile_href", ASCENDING)], name="idx_profile_href")

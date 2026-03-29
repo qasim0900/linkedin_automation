@@ -91,7 +91,10 @@ class DriverManager:
                 options.add_argument("--headless=new")
             else:
                 options.add_argument("--start-maximized")
-            user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+            user_agent = os.getenv(
+                "CHROME_USER_AGENT",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+            )
             options.add_argument(f"--user-agent={user_agent}")
             options.add_experimental_option(
                 "prefs",
@@ -107,7 +110,9 @@ class DriverManager:
             )
             options.add_experimental_option("excludeSwitches", ["enable-automation"])
             options.add_experimental_option("useAutomationExtension", False)
-            self.driver = uc.Chrome(version_main=144, options=options)
+            _ver_env = os.getenv("CHROME_DRIVER_VERSION", "").strip()
+            chrome_version = int(_ver_env) if _ver_env.isdigit() else None
+            self.driver = uc.Chrome(version_main=chrome_version, options=options)
             self.driver.execute_script(
                 "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
             )

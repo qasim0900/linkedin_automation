@@ -1,0 +1,102 @@
+2026-03-27 10:16:01,681 - bot - INFO - No active driver found. Creating new driver.
+2026-03-27 10:19:05,279 - undetected_chromedriver.patcher - INFO - patching driver executable C:\Users\qasim\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2026-03-27 10:19:13,218 - bot - ERROR - Failed to create Chrome driver: Message: invalid argument: cannot parse capability: goog:chromeOptions
+from invalid argument: unrecognized chrome option: excludeSwitches
+Stacktrace:
+	undetected_chromedriver!GetHandleVerifier [0x5325e3+10dd3]
+	undetected_chromedriver!GetHandleVerifier [0x532714+10f04]
+	undetected_chromedriver!(No symbol) [0x3020d0]
+	undetected_chromedriver!(No symbol) [0x32a93d]
+	undetected_chromedriver!(No symbol) [0x32c400]
+	undetected_chromedriver!(No symbol) [0x326f73]
+	undetected_chromedriver!(No symbol) [0x378553]
+	undetected_chromedriver!(No symbol) [0x37803b]
+	undetected_chromedriver!(No symbol) [0x3797d2]
+	undetected_chromedriver!(No symbol) [0x3795d7]
+	undetected_chromedriver!(No symbol) [0x36d986]
+	undetected_chromedriver!(No symbol) [0x3402f9]
+	undetected_chromedriver!(No symbol) [0x3410b4]
+	undetected_chromedriver!GetHandleVerifier [0x792d54+271544]
+	undetected_chromedriver!GetHandleVerifier [0x78e399+26cb89]
+	undetected_chromedriver!GetHandleVerifier [0x7acc45+28b435]
+	undetected_chromedriver!GetHandleVerifier [0x54cee8+2b6d8]
+	undetected_chromedriver!GetHandleVerifier [0x554f1d+3370d]
+	undetected_chromedriver!GetHandleVerifier [0x53af68+19758]
+	undetected_chromedriver!GetHandleVerifier [0x53b132+19922]
+	undetected_chromedriver!GetHandleVerifier [0x5240cf+28bf]
+	KERNEL32!BaseThreadInitThunk [0x7625fcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f839e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f836e+ee]
+
+2026-03-27 10:19:41,095 - bot - INFO - No active driver found. Creating new driver.
+2026-03-27 10:19:56,656 - undetected_chromedriver.patcher - INFO - patching driver executable C:\Users\qasim\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2026-03-27 10:20:04,596 - bot - ERROR - Failed to create Chrome driver: Message: invalid argument: cannot parse capability: goog:chromeOptions
+from invalid argument: unrecognized chrome option: excludeSwitches
+Stacktrace:
+	undetected_chromedriver!GetHandleVerifier [0x7925e3+10dd3]
+	undetected_chromedriver!GetHandleVerifier [0x792714+10f04]
+	undetected_chromedriver!(No symbol) [0x5620d0]
+	undetected_chromedriver!(No symbol) [0x58a93d]
+	undetected_chromedriver!(No symbol) [0x58c400]
+	undetected_chromedriver!(No symbol) [0x586f73]
+	undetected_chromedriver!(No symbol) [0x5d8553]
+	undetected_chromedriver!(No symbol) [0x5d803b]
+	undetected_chromedriver!(No symbol) [0x5d97d2]
+	undetected_chromedriver!(No symbol) [0x5d95d7]
+	undetected_chromedriver!(No symbol) [0x5cd986]
+	undetected_chromedriver!(No symbol) [0x5a02f9]
+	undetected_chromedriver!(No symbol) [0x5a10b4]
+	undetected_chromedriver!GetHandleVerifier [0x9f2d54+271544]
+	undetected_chromedriver!GetHandleVerifier [0x9ee399+26cb89]
+	undetected_chromedriver!GetHandleVerifier [0xa0cc45+28b435]
+	undetected_chromedriver!GetHandleVerifier [0x7acee8+2b6d8]
+	undetected_chromedriver!GetHandleVerifier [0x7b4f1d+3370d]
+	undetected_chromedriver!GetHandleVerifier [0x79af68+19758]
+	undetected_chromedriver!GetHandleVerifier [0x79b132+19922]
+	undetected_chromedriver!GetHandleVerifier [0x7840cf+28bf]
+	KERNEL32!BaseThreadInitThunk [0x7625fcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f839e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f836e+ee]
+
+2026-03-29 06:23:19,827 - bot - INFO - No active driver found. Creating new driver.
+2026-03-29 06:23:43,198 - undetected_chromedriver.patcher - INFO - patching driver executable C:\Users\qasim\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2026-03-29 06:23:52,948 - bot - ERROR - Failed to create Chrome driver: Message: invalid argument: cannot parse capability: goog:chromeOptions
+from invalid argument: unrecognized chrome option: excludeSwitches
+Stacktrace:
+	undetected_chromedriver!GetHandleVerifier [0xd225e3+10dd3]
+	undetected_chromedriver!GetHandleVerifier [0xd22714+10f04]
+	undetected_chromedriver!(No symbol) [0xaf20d0]
+	undetected_chromedriver!(No symbol) [0xb1a93d]
+	undetected_chromedriver!(No symbol) [0xb1c400]
+	undetected_chromedriver!(No symbol) [0xb16f73]
+	undetected_chromedriver!(No symbol) [0xb68553]
+	undetected_chromedriver!(No symbol) [0xb6803b]
+	undetected_chromedriver!(No symbol) [0xb697d2]
+	undetected_chromedriver!(No symbol) [0xb695d7]
+	undetected_chromedriver!(No symbol) [0xb5d986]
+	undetected_chromedriver!(No symbol) [0xb302f9]
+	undetected_chromedriver!(No symbol) [0xb310b4]
+	undetected_chromedriver!GetHandleVerifier [0xf82d54+271544]
+	undetected_chromedriver!GetHandleVerifier [0xf7e399+26cb89]
+	undetected_chromedriver!GetHandleVerifier [0xf9cc45+28b435]
+	undetected_chromedriver!GetHandleVerifier [0xd3cee8+2b6d8]
+	undetected_chromedriver!GetHandleVerifier [0xd44f1d+3370d]
+	undetected_chromedriver!GetHandleVerifier [0xd2af68+19758]
+	undetected_chromedriver!GetHandleVerifier [0xd2b132+19922]
+	undetected_chromedriver!GetHandleVerifier [0xd140cf+28bf]
+	KERNEL32!BaseThreadInitThunk [0x7625fcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f839e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f836e+ee]
+
+2026-03-29 06:24:24,375 - __main__ - INFO - Received signal 2, shutting down gracefully...
+2026-03-29 06:24:24,376 - __main__ - INFO - Shutting down automation system...
+2026-03-29 06:24:24,377 - scheduler - INFO - Scheduler stopped
+2026-03-29 06:24:24,377 - scheduler - INFO - Automation system stopped
+2026-03-29 06:24:24,379 - database - INFO - Database connection closed
+2026-03-29 06:24:24,380 - __main__ - INFO - Shutdown complete
+2026-03-29 06:24:24,766 - __main__ - INFO - Received signal 2, shutting down gracefully...
+2026-03-29 06:24:24,767 - __main__ - INFO - Shutting down automation system...
+2026-03-29 06:24:24,767 - scheduler - INFO - Scheduler stopped
+2026-03-29 06:24:24,768 - scheduler - INFO - Automation system stopped
+2026-03-29 06:24:24,769 - database - INFO - Database connection closed
+2026-03-29 06:24:24,770 - __main__ - INFO - Shutdown complete

@@ -11,64 +11,40 @@ from database.queries import (
     upsert_profile_operation,
 )
 
-# --------------------------------
-# :: Logger Variable
-# --------------------------------
-
-""" 
-Logger for the bot module. This logger will be used to log important events, warnings,
-and errors related to the bot's operation.
-"""
 
 logger = logging.getLogger(__name__)
 
 
-# --------------------------------
-# :: Database Manager Class
-# --------------------------------
-
-""" 
-DatabaseManager is a singleton class responsible for managing the MongoDB connection and providing methods to interact with the database.
-"""
-
-
 class DatabaseManager:
+    """
+    Singleton manager for MongoDB connections and CRUD operations.
+
+    Supports four region-specific collections:
+      - usa_google_connections    (USA Google-scraped profiles)
+      - lahore_google_connections (Lahore Google-scraped profiles)
+      - usa_linkedin_connections  (USA LinkedIn connection targets)
+      - lahore_linkedin_connections (Lahore LinkedIn connection targets)
+
+    Legacy single-collection access is preserved via the
+    `profiles_collection` property for backward compatibility.
+    """
+
     _instance = None
     _client = None
     _db = None
-
-    # --------------------------------
-    # :: New Method
-    # --------------------------------
-
-    """
-    Implements the singleton pattern to ensure only one instance of DatabaseManager exists.
-    """
 
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(DatabaseManager, cls).__new__(cls)
         return cls._instance
 
-    # --------------------------------
-    # :: Init Method
-    # --------------------------------
-
-    """
-    Initializes the DatabaseManager class with default values for the MongoDB client and database.
-    """
-
     def __init__(self):
         if self._client is None:
             self._connect()
 
-    # --------------------------------
-    # :: Connect Method
-    # --------------------------------
-
-    """
-    Establishes a connection to the MongoDB database using the connection string from the configuration.
-    """
+    # ------------------------------------------------------------------
+    # :: Connection Lifecycle
+    # ------------------------------------------------------------------
 
     def _connect(self):
         try:
@@ -81,7 +57,9 @@ class DatabaseManager:
             self._client.admin.command("ping")
             self._db = self._client[config.DATABASE_NAME]
             self._create_indexes()
-            logger.info("Successfully connected to MongoDB")
+            logger.info(
+                f"Successfully connected to MongoDB — database: '{config.DATABASE_NAME}'"
+            )
         except ConnectionFailure as e:
             logger.error(
                 f"MongoDB connection failed: {e}. "
@@ -94,195 +72,151 @@ class DatabaseManager:
             self._client = None
             self._db = None
 
-    # --------------------------------
-    # :: Ensure Connected Method
-    # --------------------------------
-
-    """
-    Ensures that the database connection is established before performing any operations. If the connection is lost, it will attempt to reconnect.
-    """
-
     def _ensure_connected(self):
         if self._db is not None:
             return True
         self._connect()
         return self._db is not None
 
-    # --------------------------------
-    # :: Create Indexes Method
-    # --------------------------------
-
-    """
-    Creates necessary indexes on the MongoDB collections to optimize query performance. This method is called after establishing a connection to the database.
-    """
-
     def _create_indexes(self):
         try:
             from database.indexes import ensure_indexes
-
             ensure_indexes(self._db, config)
         except Exception as e:
             logger.error(f"Error creating indexes: {e}")
 
-    # --------------------------------
-    # :: Database Property
-    # --------------------------------
-
-    """
-    Provides access to the MongoDB database instance. Ensures that the connection is established before returning the database object. 
-    If the connection is not available, it will raise a ConnectionFailure exception.
-    """
+    # ------------------------------------------------------------------
+    # :: Database & Collection Properties
+    # ------------------------------------------------------------------
 
     @property
     def db(self):
         self._ensure_connected()
         return self._db
 
-    # --------------------------------
-    # :: Profiles Collection Property
-    # --------------------------------
+    def _get_collection(self, name):
+        if not self._ensure_connected():
+            raise ConnectionFailure("MongoDB is not connected")
+        return self._db[name]
 
-    """
-    Provides access to the profiles collection in the MongoDB database. Ensures that the connection is established before returning the collection object. 
-    If the connection is not available, it will raise a ConnectionFailure exception.
-    """
+    # --- Region-specific Google-scraped profile collections -----------
+
+    @property
+    def usa_profiles_collection(self):
+        return self._get_collection(config.USA_COLLECTION)
+
+    @property
+    def lahore_profiles_collection(self):
+        return self._get_collection(config.LAHORE_COLLECTION)
+
+    # --- Region-specific LinkedIn connection collections --------------
+
+    @property
+    def usa_message_collection(self):
+        return self._get_collection(config.USA_MESSAGE_COLLECTION)
+
+    @property
+    def lahore_message_collection(self):
+        return self._get_collection(config.LAHORE_MESSAGE_COLLECTION)
+
+    # --- Legacy single-collection access (backward compatible) --------
 
     @property
     def profiles_collection(self):
-        if not self._ensure_connected():
-            raise ConnectionFailure("MongoDB is not connected")
-        return self._db[config.PROFILES_COLLECTION]
-
-    # ------------------------------------
-    # :: Connections Collection Property
-    # ------------------------------------
-
-    """
-    Provides access to the connections collection in the MongoDB database. Ensures that the connection is established before returning the collection object. 
-    If the connection is not available, it will raise a ConnectionFailure exception.
-    """
+        """Default to the USA Google collection for backward compatibility."""
+        return self._get_collection(config.PROFILES_COLLECTION)
 
     @property
     def connections_collection(self):
-        if not self._ensure_connected():
-            raise ConnectionFailure("MongoDB is not connected")
-        return self._db[config.CONNECTIONS_COLLECTION]
-
-    # --------------------------------
-    # :: Messages Collection Property
-    # --------------------------------
-
-    """
-    Provides access to the messages collection in the MongoDB database. Ensures that the connection is established before returning the collection object. 
-    If the connection is not available, it will raise a ConnectionFailure exception.
-    """
+        return self._get_collection(config.CONNECTIONS_COLLECTION)
 
     @property
     def messages_collection(self):
-        if not self._ensure_connected():
-            raise ConnectionFailure("MongoDB is not connected")
-        return self._db[config.MESSAGES_COLLECTION]
-
-    # -------------------------------------
-    # :: Activity Log Collection Property
-    # -------------------------------------
-
-    """
-    Provides access to the activity log collection in the MongoDB database. Ensures that the connection is established before returning the collection object. 
-    If the connection is not available, it will raise a ConnectionFailure exception.
-    """
+        return self._get_collection(config.MESSAGES_COLLECTION)
 
     @property
     def activity_log_collection(self):
-        if not self._ensure_connected():
-            raise ConnectionFailure("MongoDB is not connected")
-        return self._db[config.ACTIVITY_LOG_COLLECTION]
+        return self._get_collection(config.ACTIVITY_LOG_COLLECTION)
 
-    # --------------------------------
-    # :: Bulk Insert Profiles Method
-    # --------------------------------
+    # ------------------------------------------------------------------
+    # :: Helper: resolve collection by location
+    # ------------------------------------------------------------------
 
-    """
-    Inserts multiple LinkedIn profiles into the database in bulk. This method takes a list of profile dictionaries, creates upsert operations for each profile, and executes them in a single bulk write operation. It returns the number of new profiles that were inserted. If any errors occur during the process, it logs the error and returns 0.
-    """
+    def _resolve_profiles_collection(self, location=None):
+        """
+        Return the correct profiles collection for the given location string.
+        Falls back to the default profiles collection when location is unknown.
+        """
+        if location == "Lahore":
+            return self.lahore_profiles_collection
+        return self.usa_profiles_collection
 
-    def bulk_insert_profiles(self, profiles):
+    # ------------------------------------------------------------------
+    # :: Profile Operations
+    # ------------------------------------------------------------------
+
+    def bulk_insert_profiles(self, profiles, location=None):
+        """
+        Insert multiple profiles in bulk using upsert-on-href.
+        When `location` is specified the matching regional collection is used;
+        otherwise the default (USA) collection is used.
+
+        Returns the count of newly inserted profiles.
+        """
         if not profiles:
             return 0
         try:
+            collection = self._resolve_profiles_collection(location)
             operations = [
                 upsert_profile_operation(p) for p in profiles if p.get("href")
             ]
             if not operations:
                 return 0
-            result = self.profiles_collection.bulk_write(operations, ordered=False)
-            logger.info(f"Inserted {result.upserted_count} new profiles")
+            result = collection.bulk_write(operations, ordered=False)
+            logger.info(
+                f"Bulk insert into '{collection.name}': "
+                f"{result.upserted_count} new profiles"
+            )
             return result.upserted_count
         except Exception as e:
-            logger.error(f"Error in bulk insert profiles: {e}")
+            logger.error(f"Error in bulk_insert_profiles: {e}")
             return 0
 
-    # ------------------------------------
-    # :: Get Unprocessed Profiles Method
-    # ------------------------------------
-
-    """
-    Retrieves unprocessed LinkedIn profiles from the database. This method executes a query to find profiles that have not been marked as processed, and yields each profile one at a time. The number of profiles returned can be limited by the `limit` parameter. If any errors occur during the retrieval process, it logs the error and continues yielding any successfully retrieved profiles.
-    """
-
-    def get_unprocessed_profiles(self, limit=100):
+    def get_unprocessed_profiles(self, limit=100, location=None):
+        """Yield unprocessed profiles from the appropriate regional collection."""
         try:
-            cursor = self.profiles_collection.find(unprocessed_profiles_query()).limit(
-                limit
-            )
+            collection = self._resolve_profiles_collection(location)
+            cursor = collection.find(unprocessed_profiles_query()).limit(limit)
             for profile in cursor:
                 yield profile
         except Exception as e:
             logger.error(f"Error getting unprocessed profiles: {e}")
 
-    # ----------------------------------------
-    # :: Get Profiles for Connection Method
-    # ----------------------------------------
-
-    """
-    Retrieves LinkedIn profiles that need to be connected to from the database. This method executes a query to find profiles that meet the criteria for connection, and yields each profile one at a time. The number of profiles returned can be limited by the `limit` parameter. If any errors occur during the retrieval process, it logs the error and continues yielding any successfully retrieved profiles.
-    """
-
-    def get_profiles_for_connection(self, limit=20):
+    def get_profiles_for_connection(self, limit=20, location=None):
+        """Yield profiles that are ready to receive a connection request."""
         try:
-            cursor = self.profiles_collection.find(needs_connection_query()).limit(
-                limit
-            )
+            collection = self._resolve_profiles_collection(location)
+            cursor = collection.find(needs_connection_query()).limit(limit)
             for profile in cursor:
                 yield profile
         except Exception as e:
             logger.error(f"Error getting profiles for connection: {e}")
 
-    # ---------------------------------------
-    # :: Get Profiles for Messaging Method
-    # ---------------------------------------
-
-    """
-    Retrieves LinkedIn profiles that need to be messaged from the database. This method executes a query to find profiles that meet the criteria for messaging, and yields each profile one at a time. The number of profiles returned can be limited by the `limit` parameter. If any errors occur during the retrieval process, it logs the error and continues yielding any successfully retrieved profiles.
-    """
-
-    def get_profiles_for_messaging(self, limit=15):
+    def get_profiles_for_messaging(self, limit=15, location=None):
+        """Yield connected profiles that have not yet been messaged."""
         try:
-            cursor = self.profiles_collection.find(needs_message_query()).limit(limit)
+            collection = self._resolve_profiles_collection(location)
+            cursor = collection.find(needs_message_query()).limit(limit)
             for profile in cursor:
                 yield profile
         except Exception as e:
             logger.error(f"Error getting profiles for messaging: {e}")
 
-    # ----------------------------------
-    # :: Mark Profile Processed Method
-    # ----------------------------------
-
-    """
-    Marks a LinkedIn profile as processed in the database. This method updates the profile document with the current timestamp and the specified action (e.g., "processed", "connected", "messaged"). If the action is "connected" or "messaged", it also updates additional fields to indicate that the profile has been connected to or messaged, along with the respective timestamps. The method returns True if the profile was successfully updated, and False if any errors occur during the update process.
-    """
-
-    def mark_profile_processed(self, profile_href, action="processed"):
+    def mark_profile_processed(self, profile_href, action="processed", location=None):
+        """
+        Mark a profile as processed with the given action label.
+        Writes to the appropriate regional collection.
+        """
         try:
             update_data = {
                 "processed": True,
@@ -295,7 +229,9 @@ class DatabaseManager:
             elif action == "messaged":
                 update_data["messaged"] = True
                 update_data["message_date"] = datetime.utcnow()
-            result = self.profiles_collection.update_one(
+
+            collection = self._resolve_profiles_collection(location)
+            result = collection.update_one(
                 {"href": profile_href}, {"$set": update_data}
             )
             return result.modified_count > 0
@@ -303,15 +239,12 @@ class DatabaseManager:
             logger.error(f"Error marking profile processed: {e}")
             return False
 
-    # --------------------------------
-    # :: Log Activity Method
-    # --------------------------------
-
-    """
-    Logs an activity in the activity log collection. This method takes the action type (e.g., "connection", "message", "visit"), the profile href associated with the activity, and any additional details as a dictionary. It creates an activity document with the provided information and the current timestamp, and inserts it into the activity log collection. The method returns True if the activity was successfully logged, and False if any errors occur during the logging process.
-    """
+    # ------------------------------------------------------------------
+    # :: Activity Logging
+    # ------------------------------------------------------------------
 
     def log_activity(self, action_type, profile_href, details=None):
+        """Insert an activity record into the activity log collection."""
         try:
             activity = {
                 "action_type": action_type,
@@ -325,15 +258,12 @@ class DatabaseManager:
             logger.error(f"Error logging activity: {e}")
             return False
 
-    # --------------------------------
-    # :: IGet Daily Stats Method
-    # --------------------------------
-
-    """
-    Retrieves daily activity statistics from the activity log collection. This method executes an aggregation pipeline to group activities by their action type and count the number of occurrences for each type. It returns a dictionary where the keys are the action types and the values are the respective counts. If any errors occur during the retrieval process, it logs the error and returns an empty dictionary.
-    """
+    # ------------------------------------------------------------------
+    # :: Stats & Rate Limit Checks
+    # ------------------------------------------------------------------
 
     def get_daily_stats(self):
+        """Return today's action counts keyed by action_type."""
         try:
             results = list(
                 self.activity_log_collection.aggregate(daily_activity_pipeline())
@@ -343,26 +273,20 @@ class DatabaseManager:
             logger.error(f"Error getting daily stats: {e}")
             return {}
 
-    # --------------------------------
-    # :: Check Rate Limits Method
-    # --------------------------------
-
-    """
-    Checks if the rate limits for connections, messages, and profile visits have been reached. This method retrieves daily activity statistics and compares them to the configured maximum limits for each activity type. It returns a dictionary indicating whether each limit has been reached.
-    """
-
     def check_rate_limits(self):
+        """Return a dict indicating which daily action limits have been reached."""
         try:
-            today = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
             stats = self.get_daily_stats()
-
             return {
-                "connections_reached": stats.get("connection", 0)
-                >= config.MAX_CONNECTIONS_PER_DAY,
-                "messages_reached": stats.get("message", 0)
-                >= config.MAX_MESSAGES_PER_DAY,
-                "visits_reached": stats.get("visit", 0)
-                >= config.MAX_PROFILE_VISITS_PER_DAY,
+                "connections_reached": (
+                    stats.get("connection", 0) >= config.MAX_CONNECTIONS_PER_DAY
+                ),
+                "messages_reached": (
+                    stats.get("message", 0) >= config.MAX_MESSAGES_PER_DAY
+                ),
+                "visits_reached": (
+                    stats.get("visit", 0) >= config.MAX_PROFILE_VISITS_PER_DAY
+                ),
             }
         except Exception as e:
             logger.error(f"Error checking rate limits: {e}")
@@ -372,27 +296,14 @@ class DatabaseManager:
                 "visits_reached": False,
             }
 
-    # --------------------------------
-    # :: Close Method
-    # --------------------------------
-
-    """
-    Closes the MongoDB connection when the DatabaseManager instance is deleted. This ensures that resources are properly released when the application is shutting down or when the DatabaseManager is no longer needed.
-    """
+    # ------------------------------------------------------------------
+    # :: Cleanup
+    # ------------------------------------------------------------------
 
     def close(self):
         if self._client:
             self._client.close()
             logger.info("Database connection closed")
 
-
-# --------------------------------
-# :: Logger Variable
-# --------------------------------
-
-""" 
-Logger for the bot module. This logger will be used to log important events, warnings,
-and errors related to the bot's operation.
-"""
 
 db_manager = DatabaseManager()
