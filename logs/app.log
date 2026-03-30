@@ -100,3 +100,421 @@ Stacktrace:
 2026-03-29 06:24:24,768 - scheduler - INFO - Automation system stopped
 2026-03-29 06:24:24,769 - database - INFO - Database connection closed
 2026-03-29 06:24:24,770 - __main__ - INFO - Shutdown complete
+2026-03-29 06:31:42,122 - bot - INFO - No active driver found. Creating new driver.
+2026-03-29 06:32:25,841 - undetected_chromedriver.patcher - INFO - patching driver executable C:\Users\qasim\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2026-03-29 06:32:33,230 - bot - ERROR - Failed to create Chrome driver: Message: invalid argument: cannot parse capability: goog:chromeOptions
+from invalid argument: unrecognized chrome option: excludeSwitches
+Stacktrace:
+	undetected_chromedriver!GetHandleVerifier [0x10a25e3+10dd3]
+	undetected_chromedriver!GetHandleVerifier [0x10a2714+10f04]
+	undetected_chromedriver!(No symbol) [0xe720d0]
+	undetected_chromedriver!(No symbol) [0xe9a93d]
+	undetected_chromedriver!(No symbol) [0xe9c400]
+	undetected_chromedriver!(No symbol) [0xe96f73]
+	undetected_chromedriver!(No symbol) [0xee8553]
+	undetected_chromedriver!(No symbol) [0xee803b]
+	undetected_chromedriver!(No symbol) [0xee97d2]
+	undetected_chromedriver!(No symbol) [0xee95d7]
+	undetected_chromedriver!(No symbol) [0xedd986]
+	undetected_chromedriver!(No symbol) [0xeb02f9]
+	undetected_chromedriver!(No symbol) [0xeb10b4]
+	undetected_chromedriver!GetHandleVerifier [0x1302d54+271544]
+	undetected_chromedriver!GetHandleVerifier [0x12fe399+26cb89]
+	undetected_chromedriver!GetHandleVerifier [0x131cc45+28b435]
+	undetected_chromedriver!GetHandleVerifier [0x10bcee8+2b6d8]
+	undetected_chromedriver!GetHandleVerifier [0x10c4f1d+3370d]
+	undetected_chromedriver!GetHandleVerifier [0x10aaf68+19758]
+	undetected_chromedriver!GetHandleVerifier [0x10ab132+19922]
+	undetected_chromedriver!GetHandleVerifier [0x10940cf+28bf]
+	KERNEL32!BaseThreadInitThunk [0x7625fcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f839e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f836e+ee]
+
+2026-03-29 06:33:05,269 - __main__ - INFO - Received signal 2, shutting down gracefully...
+2026-03-29 06:33:05,270 - __main__ - INFO - Shutting down automation system...
+2026-03-29 06:33:05,271 - scheduler - INFO - Scheduler stopped
+2026-03-29 06:33:05,272 - scheduler - INFO - Automation system stopped
+2026-03-29 06:33:05,274 - database - INFO - Database connection closed
+2026-03-29 06:33:05,275 - __main__ - INFO - Shutdown complete
+2026-03-29 06:33:05,680 - __main__ - INFO - Received signal 2, shutting down gracefully...
+2026-03-29 06:33:05,681 - __main__ - INFO - Shutting down automation system...
+2026-03-29 06:33:05,681 - scheduler - INFO - Scheduler stopped
+2026-03-29 06:33:05,681 - scheduler - INFO - Automation system stopped
+2026-03-29 06:33:05,682 - database - INFO - Database connection closed
+2026-03-29 06:33:05,683 - __main__ - INFO - Shutdown complete
+2026-03-29 06:34:45,129 - bot - INFO - No active driver found. Creating new driver.
+2026-03-29 06:35:01,122 - undetected_chromedriver.patcher - INFO - patching driver executable C:\Users\qasim\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2026-03-29 06:35:09,113 - bot - WARNING - Undetected Chrome driver failed: Message: session not created: cannot connect to chrome at 127.0.0.1:57176
+from session not created: This version of ChromeDriver only supports Chrome version 147
+Current browser version is 146.0.7680.165; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	undetected_chromedriver!GetHandleVerifier [0x9025e3+10dd3]
+	undetected_chromedriver!GetHandleVerifier [0x902714+10f04]
+	undetected_chromedriver!(No symbol) [0x6d20d0]
+	undetected_chromedriver!(No symbol) [0x70d712]
+	undetected_chromedriver!(No symbol) [0x70c739]
+	undetected_chromedriver!(No symbol) [0x702865]
+	undetected_chromedriver!(No symbol) [0x702686]
+	undetected_chromedriver!(No symbol) [0x749dbf]
+	undetected_chromedriver!(No symbol) [0x7495d7]
+	undetected_chromedriver!(No symbol) [0x73d986]
+	undetected_chromedriver!(No symbol) [0x7102f9]
+	undetected_chromedriver!(No symbol) [0x7110b4]
+	undetected_chromedriver!GetHandleVerifier [0xb62d54+271544]
+	undetected_chromedriver!GetHandleVerifier [0xb5e399+26cb89]
+	undetected_chromedriver!GetHandleVerifier [0xb7cc45+28b435]
+	undetected_chromedriver!GetHandleVerifier [0x91cee8+2b6d8]
+	undetected_chromedriver!GetHandleVerifier [0x924f1d+3370d]
+	undetected_chromedriver!GetHandleVerifier [0x90af68+19758]
+	undetected_chromedriver!GetHandleVerifier [0x90b132+19922]
+	undetected_chromedriver!GetHandleVerifier [0x8f40cf+28bf]
+	KERNEL32!BaseThreadInitThunk [0x7625fcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f839e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f836e+ee]
+
+2026-03-29 06:35:09,125 - bot - INFO - Trying fallback with regular Selenium Chrome driver...
+2026-03-29 06:35:09,544 - WDM - INFO - ====== WebDriver manager ======
+2026-03-29 06:35:15,626 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2026-03-29 06:35:19,772 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2026-03-29 06:35:21,467 - WDM - INFO - There is no [win64] chromedriver "146.0.7680.165" for browser google-chrome "146.0.7680" in cache
+2026-03-29 06:35:21,468 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2026-03-29 06:35:24,159 - WDM - INFO - WebDriver version 146.0.7680.165 selected
+2026-03-29 06:35:24,169 - WDM - INFO - Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/146.0.7680.165/win32/chromedriver-win32.zip
+2026-03-29 06:35:24,170 - WDM - INFO - About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/146.0.7680.165/win32/chromedriver-win32.zip
+2026-03-29 06:35:25,548 - WDM - INFO - Driver downloading response is 200
+2026-03-29 06:35:58,228 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2026-03-29 06:35:59,522 - WDM - INFO - Driver has been saved in cache [C:\Users\qasim\.wdm\drivers\chromedriver\win64\146.0.7680.165]
+2026-03-29 06:36:02,648 - bot - INFO - Chrome driver created successfully with regular Selenium
+2026-03-29 06:36:02,651 - scraper - INFO - Starting Google scrape for USA: https://www.google.com/search?q=site%3Alinkedin.com%2Fin+%28%22HR+Manager%22+OR+…
+2026-03-29 06:36:14,999 - scraper - INFO - Scraping page 1
+2026-03-29 06:36:16,085 - database - INFO - Bulk insert into 'usa_google_connections': 10 new profiles
+2026-03-29 06:36:16,086 - scraper - INFO - Page 1: found 10 profiles, 10 new
+2026-03-29 06:36:34,243 - scraper - INFO - Scraping page 2
+2026-03-29 06:36:35,550 - database - INFO - Bulk insert into 'usa_google_connections': 10 new profiles
+2026-03-29 06:36:35,551 - scraper - INFO - Page 2: found 10 profiles, 10 new
+2026-03-29 06:36:55,780 - scraper - INFO - Scraping page 3
+2026-03-29 06:36:56,850 - database - INFO - Bulk insert into 'usa_google_connections': 10 new profiles
+2026-03-29 06:36:56,850 - scraper - INFO - Page 3: found 10 profiles, 10 new
+2026-03-29 06:37:11,824 - __main__ - INFO - Received signal 2, shutting down gracefully...
+2026-03-29 06:37:11,827 - __main__ - INFO - Shutting down automation system...
+2026-03-29 06:37:11,828 - scheduler - INFO - Scheduler stopped
+2026-03-29 06:37:11,830 - scheduler - INFO - Automation system stopped
+2026-03-29 06:37:11,833 - database - INFO - Database connection closed
+2026-03-29 06:37:11,835 - __main__ - INFO - Shutdown complete
+2026-03-29 06:37:12,129 - __main__ - INFO - Received signal 2, shutting down gracefully...
+2026-03-29 06:37:12,130 - __main__ - INFO - Shutting down automation system...
+2026-03-29 06:37:12,131 - scheduler - INFO - Scheduler stopped
+2026-03-29 06:37:12,131 - scheduler - INFO - Automation system stopped
+2026-03-29 06:37:12,132 - database - INFO - Database connection closed
+2026-03-29 06:37:12,132 - __main__ - INFO - Shutdown complete
+2026-03-29 06:37:50,252 - bot - INFO - No active driver found. Creating new driver.
+2026-03-29 06:38:14,236 - undetected_chromedriver.patcher - INFO - patching driver executable C:\Users\qasim\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2026-03-29 06:38:22,438 - bot - WARNING - Undetected Chrome driver failed: Message: session not created: cannot connect to chrome at 127.0.0.1:57547
+from session not created: This version of ChromeDriver only supports Chrome version 147
+Current browser version is 146.0.7680.165; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	undetected_chromedriver!GetHandleVerifier [0x8a25e3+10dd3]
+	undetected_chromedriver!GetHandleVerifier [0x8a2714+10f04]
+	undetected_chromedriver!(No symbol) [0x6720d0]
+	undetected_chromedriver!(No symbol) [0x6ad712]
+	undetected_chromedriver!(No symbol) [0x6ac739]
+	undetected_chromedriver!(No symbol) [0x6a2865]
+	undetected_chromedriver!(No symbol) [0x6a2686]
+	undetected_chromedriver!(No symbol) [0x6e9dbf]
+	undetected_chromedriver!(No symbol) [0x6e95d7]
+	undetected_chromedriver!(No symbol) [0x6dd986]
+	undetected_chromedriver!(No symbol) [0x6b02f9]
+	undetected_chromedriver!(No symbol) [0x6b10b4]
+	undetected_chromedriver!GetHandleVerifier [0xb02d54+271544]
+	undetected_chromedriver!GetHandleVerifier [0xafe399+26cb89]
+	undetected_chromedriver!GetHandleVerifier [0xb1cc45+28b435]
+	undetected_chromedriver!GetHandleVerifier [0x8bcee8+2b6d8]
+	undetected_chromedriver!GetHandleVerifier [0x8c4f1d+3370d]
+	undetected_chromedriver!GetHandleVerifier [0x8aaf68+19758]
+	undetected_chromedriver!GetHandleVerifier [0x8ab132+19922]
+	undetected_chromedriver!GetHandleVerifier [0x8940cf+28bf]
+	KERNEL32!BaseThreadInitThunk [0x7625fcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f839e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f836e+ee]
+
+2026-03-29 06:38:22,442 - bot - INFO - Trying fallback with regular Selenium Chrome driver...
+2026-03-29 06:38:22,471 - WDM - INFO - ====== WebDriver manager ======
+2026-03-29 06:38:27,731 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2026-03-29 06:38:29,687 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2026-03-29 06:38:32,186 - WDM - INFO - Driver [C:\Users\qasim\.wdm\drivers\chromedriver\win64\146.0.7680.165\chromedriver-win32/chromedriver.exe] found in cache
+2026-03-29 06:38:33,808 - bot - INFO - Chrome driver created successfully with regular Selenium
+2026-03-29 06:38:33,809 - scraper - INFO - Starting Google scrape for USA: https://www.google.com/search?q=site%3Alinkedin.com%2Fin+%28%22HR+Manager%22+OR+…
+2026-03-29 06:38:46,615 - scraper - INFO - Scraping page 1
+2026-03-29 06:38:47,573 - database - INFO - Bulk insert into 'usa_google_connections': 10 new profiles
+2026-03-29 06:38:47,573 - scraper - INFO - Page 1: found 10 profiles, 10 new
+2026-03-29 06:39:08,005 - scraper - INFO - Scraping page 2
+2026-03-29 06:39:09,026 - database - INFO - Bulk insert into 'usa_google_connections': 10 new profiles
+2026-03-29 06:39:09,026 - scraper - INFO - Page 2: found 10 profiles, 10 new
+2026-03-29 06:39:28,185 - scraper - INFO - Scraping page 3
+2026-03-29 06:39:29,527 - database - INFO - Bulk insert into 'usa_google_connections': 10 new profiles
+2026-03-29 06:39:29,528 - scraper - INFO - Page 3: found 10 profiles, 10 new
+2026-03-29 06:39:48,143 - scraper - INFO - Scraping page 4
+2026-03-29 06:39:49,047 - database - INFO - Bulk insert into 'usa_google_connections': 10 new profiles
+2026-03-29 06:39:49,048 - scraper - INFO - Page 4: found 10 profiles, 10 new
+2026-03-29 06:40:13,019 - scraper - INFO - Scraping page 5
+2026-03-29 06:40:13,916 - database - INFO - Bulk insert into 'usa_google_connections': 10 new profiles
+2026-03-29 06:40:13,916 - scraper - INFO - Page 5: found 10 profiles, 10 new
+2026-03-29 06:40:29,861 - scraper - INFO - Google scraping completed for USA. Total new profiles: 50
+2026-03-29 06:40:58,313 - scraper - INFO - Starting Google scrape for USA: https://www.google.com/search?q=site%3Alinkedin.com%2Fin+%28%22HR+Manager%22+OR+…
+2026-03-29 06:41:10,344 - scraper - INFO - Scraping page 1
+2026-03-29 06:41:11,648 - database - INFO - Bulk insert into 'usa_google_connections': 0 new profiles
+2026-03-29 06:41:11,648 - scraper - INFO - Page 1: found 10 profiles, 0 new
+2026-03-29 06:41:30,765 - scraper - INFO - Scraping page 2
+2026-03-29 06:41:31,566 - database - INFO - Bulk insert into 'usa_google_connections': 0 new profiles
+2026-03-29 06:41:31,567 - scraper - INFO - Page 2: found 10 profiles, 0 new
+2026-03-29 06:41:52,893 - scraper - INFO - Scraping page 3
+2026-03-29 06:41:53,807 - database - INFO - Bulk insert into 'usa_google_connections': 0 new profiles
+2026-03-29 06:41:53,808 - scraper - INFO - Page 3: found 10 profiles, 0 new
+2026-03-29 06:42:10,018 - __main__ - INFO - Received signal 2, shutting down gracefully...
+2026-03-29 06:42:10,024 - __main__ - INFO - Shutting down automation system...
+2026-03-29 06:42:10,026 - scheduler - INFO - Scheduler stopped
+2026-03-29 06:42:10,027 - scheduler - INFO - Automation system stopped
+2026-03-29 06:42:10,030 - database - INFO - Database connection closed
+2026-03-29 06:42:10,031 - __main__ - INFO - Shutdown complete
+2026-03-29 07:37:22,607 - bot - INFO - No active driver found. Creating new driver.
+2026-03-29 07:37:22,650 - bot - WARNING - Undetected Chrome driver failed: <urlopen error [Errno 11001] getaddrinfo failed>
+2026-03-29 07:37:22,650 - bot - INFO - Trying fallback with regular Selenium Chrome driver...
+2026-03-29 07:37:22,666 - WDM - INFO - ====== WebDriver manager ======
+2026-03-29 07:37:27,881 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2026-03-29 07:37:27,886 - bot - ERROR - Both driver methods failed. Undetected: <urlopen error [Errno 11001] getaddrinfo failed>, Regular: Could not reach host. Are you offline?
+2026-03-29 07:38:29,940 - bot - INFO - No active driver found. Creating new driver.
+2026-03-29 07:38:47,107 - undetected_chromedriver.patcher - INFO - patching driver executable C:\Users\qasim\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2026-03-29 07:38:55,319 - bot - WARNING - Undetected Chrome driver failed: Message: session not created: cannot connect to chrome at 127.0.0.1:65177
+from session not created: This version of ChromeDriver only supports Chrome version 147
+Current browser version is 146.0.7680.165; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	undetected_chromedriver!GetHandleVerifier [0x9225e3+10dd3]
+	undetected_chromedriver!GetHandleVerifier [0x922714+10f04]
+	undetected_chromedriver!(No symbol) [0x6f20d0]
+	undetected_chromedriver!(No symbol) [0x72d712]
+	undetected_chromedriver!(No symbol) [0x72c739]
+	undetected_chromedriver!(No symbol) [0x722865]
+	undetected_chromedriver!(No symbol) [0x722686]
+	undetected_chromedriver!(No symbol) [0x769dbf]
+	undetected_chromedriver!(No symbol) [0x7695d7]
+	undetected_chromedriver!(No symbol) [0x75d986]
+	undetected_chromedriver!(No symbol) [0x7302f9]
+	undetected_chromedriver!(No symbol) [0x7310b4]
+	undetected_chromedriver!GetHandleVerifier [0xb82d54+271544]
+	undetected_chromedriver!GetHandleVerifier [0xb7e399+26cb89]
+	undetected_chromedriver!GetHandleVerifier [0xb9cc45+28b435]
+	undetected_chromedriver!GetHandleVerifier [0x93cee8+2b6d8]
+	undetected_chromedriver!GetHandleVerifier [0x944f1d+3370d]
+	undetected_chromedriver!GetHandleVerifier [0x92af68+19758]
+	undetected_chromedriver!GetHandleVerifier [0x92b132+19922]
+	undetected_chromedriver!GetHandleVerifier [0x9140cf+28bf]
+	KERNEL32!BaseThreadInitThunk [0x7625fcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f839e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f836e+ee]
+
+2026-03-29 07:38:55,323 - bot - INFO - Trying fallback with regular Selenium Chrome driver...
+2026-03-29 07:38:55,324 - WDM - INFO - ====== WebDriver manager ======
+2026-03-29 07:39:00,719 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2026-03-29 07:39:01,890 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2026-03-29 07:39:03,032 - WDM - INFO - Driver [C:\Users\qasim\.wdm\drivers\chromedriver\win64\146.0.7680.165\chromedriver-win32/chromedriver.exe] found in cache
+2026-03-29 07:39:04,471 - bot - INFO - Chrome driver created successfully with regular Selenium
+2026-03-29 07:39:04,472 - scraper - INFO - Starting Google scrape for USA: https://www.google.com/search?q=site%3Alinkedin.com%2Fin+%28%22HR+Manager%22+OR+…
+2026-03-29 07:39:12,513 - scraper - INFO - Scraping page 1
+2026-03-29 07:39:27,731 - scraper - ERROR - Error extracting profiles from page: Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x46cdf3+10b03]
+	chromedriver!GetHandleVerifier [0x46cf24+10c34]
+	chromedriver!(No symbol) [0x252120]
+	chromedriver!(No symbol) [0x29abca]
+	chromedriver!(No symbol) [0x29ae6b]
+	chromedriver!(No symbol) [0x2dd0b2]
+	chromedriver!(No symbol) [0x2bdb54]
+	chromedriver!(No symbol) [0x2da9a5]
+	chromedriver!(No symbol) [0x2bd8a6]
+	chromedriver!(No symbol) [0x290229]
+	chromedriver!(No symbol) [0x290fe4]
+	chromedriver!GetHandleVerifier [0x6d48b9+2785c9]
+	chromedriver!GetHandleVerifier [0x6cfeb5+273bc5]
+	chromedriver!GetHandleVerifier [0x6ee06b+291d7b]
+	chromedriver!GetHandleVerifier [0x485cc8+299d8]
+	chromedriver!GetHandleVerifier [0x48d9fd+3170d]
+	chromedriver!GetHandleVerifier [0x4758c8+195d8]
+	chromedriver!GetHandleVerifier [0x475a92+197a2]
+	chromedriver!GetHandleVerifier [0x45ee9a+2baa]
+	KERNEL32!BaseThreadInitThunk [0x7625fcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f839e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f836e+ee]
+
+2026-03-29 07:39:27,751 - scraper - INFO - No profiles found on page 1
+2026-03-29 07:39:27,817 - scraper - INFO - No next page link found
+2026-03-29 07:39:27,818 - scraper - INFO - No more pages available
+2026-03-29 07:39:27,818 - scraper - INFO - Google scraping completed for USA. Total new profiles: 0
+2026-03-29 07:39:31,138 - __main__ - INFO - Received signal 2, shutting down gracefully...
+2026-03-29 07:39:31,140 - __main__ - INFO - Shutting down automation system...
+2026-03-29 07:39:31,141 - scheduler - INFO - Scheduler stopped
+2026-03-29 07:39:31,141 - scheduler - INFO - Automation system stopped
+2026-03-29 07:39:31,143 - database - INFO - Database connection closed
+2026-03-29 07:39:31,143 - __main__ - INFO - Shutdown complete
+2026-03-29 07:39:31,613 - __main__ - INFO - Received signal 2, shutting down gracefully...
+2026-03-29 07:39:31,613 - __main__ - INFO - Shutting down automation system...
+2026-03-29 07:39:31,613 - scheduler - INFO - Scheduler stopped
+2026-03-29 07:39:31,614 - scheduler - INFO - Automation system stopped
+2026-03-29 07:39:31,614 - database - INFO - Database connection closed
+2026-03-29 07:39:31,615 - __main__ - INFO - Shutdown complete
+2026-03-30 07:26:53,529 - bot - INFO - No active driver found. Creating new driver.
+2026-03-30 07:27:27,141 - undetected_chromedriver.patcher - INFO - patching driver executable C:\Users\qasim\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2026-03-30 07:27:35,441 - bot - WARNING - Undetected Chrome driver failed: Message: session not created: cannot connect to chrome at 127.0.0.1:59393
+from session not created: This version of ChromeDriver only supports Chrome version 147
+Current browser version is 146.0.7680.165; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	undetected_chromedriver!GetHandleVerifier [0xc125e3+10dd3]
+	undetected_chromedriver!GetHandleVerifier [0xc12714+10f04]
+	undetected_chromedriver!(No symbol) [0x9e20d0]
+	undetected_chromedriver!(No symbol) [0xa1d712]
+	undetected_chromedriver!(No symbol) [0xa1c739]
+	undetected_chromedriver!(No symbol) [0xa12865]
+	undetected_chromedriver!(No symbol) [0xa12686]
+	undetected_chromedriver!(No symbol) [0xa59dbf]
+	undetected_chromedriver!(No symbol) [0xa595d7]
+	undetected_chromedriver!(No symbol) [0xa4d986]
+	undetected_chromedriver!(No symbol) [0xa202f9]
+	undetected_chromedriver!(No symbol) [0xa210b4]
+	undetected_chromedriver!GetHandleVerifier [0xe72d54+271544]
+	undetected_chromedriver!GetHandleVerifier [0xe6e399+26cb89]
+	undetected_chromedriver!GetHandleVerifier [0xe8cc45+28b435]
+	undetected_chromedriver!GetHandleVerifier [0xc2cee8+2b6d8]
+	undetected_chromedriver!GetHandleVerifier [0xc34f1d+3370d]
+	undetected_chromedriver!GetHandleVerifier [0xc1af68+19758]
+	undetected_chromedriver!GetHandleVerifier [0xc1b132+19922]
+	undetected_chromedriver!GetHandleVerifier [0xc040cf+28bf]
+	KERNEL32!BaseThreadInitThunk [0x7625fcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f839e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f836e+ee]
+
+2026-03-30 07:27:35,453 - bot - INFO - Trying fallback with regular Selenium Chrome driver...
+2026-03-30 07:27:35,497 - WDM - INFO - ====== WebDriver manager ======
+2026-03-30 07:27:41,066 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2026-03-30 07:30:54,749 - bot - ERROR - Both driver methods failed. Undetected: Message: session not created: cannot connect to chrome at 127.0.0.1:59393
+from session not created: This version of ChromeDriver only supports Chrome version 147
+Current browser version is 146.0.7680.165; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	undetected_chromedriver!GetHandleVerifier [0xc125e3+10dd3]
+	undetected_chromedriver!GetHandleVerifier [0xc12714+10f04]
+	undetected_chromedriver!(No symbol) [0x9e20d0]
+	undetected_chromedriver!(No symbol) [0xa1d712]
+	undetected_chromedriver!(No symbol) [0xa1c739]
+	undetected_chromedriver!(No symbol) [0xa12865]
+	undetected_chromedriver!(No symbol) [0xa12686]
+	undetected_chromedriver!(No symbol) [0xa59dbf]
+	undetected_chromedriver!(No symbol) [0xa595d7]
+	undetected_chromedriver!(No symbol) [0xa4d986]
+	undetected_chromedriver!(No symbol) [0xa202f9]
+	undetected_chromedriver!(No symbol) [0xa210b4]
+	undetected_chromedriver!GetHandleVerifier [0xe72d54+271544]
+	undetected_chromedriver!GetHandleVerifier [0xe6e399+26cb89]
+	undetected_chromedriver!GetHandleVerifier [0xe8cc45+28b435]
+	undetected_chromedriver!GetHandleVerifier [0xc2cee8+2b6d8]
+	undetected_chromedriver!GetHandleVerifier [0xc34f1d+3370d]
+	undetected_chromedriver!GetHandleVerifier [0xc1af68+19758]
+	undetected_chromedriver!GetHandleVerifier [0xc1b132+19922]
+	undetected_chromedriver!GetHandleVerifier [0xc040cf+28bf]
+	KERNEL32!BaseThreadInitThunk [0x7625fcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f839e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f836e+ee]
+, Regular: HTTPSConnectionPool(host='googlechromelabs.github.io', port=443): Read timed out. (read timeout=None)
+2026-03-30 07:31:11,960 - bot - INFO - No active driver found. Creating new driver.
+2026-03-30 07:32:02,480 - undetected_chromedriver.patcher - INFO - patching driver executable C:\Users\qasim\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2026-03-30 07:32:13,612 - bot - WARNING - Undetected Chrome driver failed: Message: session not created: cannot connect to chrome at 127.0.0.1:59524
+from session not created: This version of ChromeDriver only supports Chrome version 147
+Current browser version is 146.0.7680.165; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	undetected_chromedriver!GetHandleVerifier [0xfe25e3+10dd3]
+	undetected_chromedriver!GetHandleVerifier [0xfe2714+10f04]
+	undetected_chromedriver!(No symbol) [0xdb20d0]
+	undetected_chromedriver!(No symbol) [0xded712]
+	undetected_chromedriver!(No symbol) [0xdec739]
+	undetected_chromedriver!(No symbol) [0xde2865]
+	undetected_chromedriver!(No symbol) [0xde2686]
+	undetected_chromedriver!(No symbol) [0xe29dbf]
+	undetected_chromedriver!(No symbol) [0xe295d7]
+	undetected_chromedriver!(No symbol) [0xe1d986]
+	undetected_chromedriver!(No symbol) [0xdf02f9]
+	undetected_chromedriver!(No symbol) [0xdf10b4]
+	undetected_chromedriver!GetHandleVerifier [0x1242d54+271544]
+	undetected_chromedriver!GetHandleVerifier [0x123e399+26cb89]
+	undetected_chromedriver!GetHandleVerifier [0x125cc45+28b435]
+	undetected_chromedriver!GetHandleVerifier [0xffcee8+2b6d8]
+	undetected_chromedriver!GetHandleVerifier [0x1004f1d+3370d]
+	undetected_chromedriver!GetHandleVerifier [0xfeaf68+19758]
+	undetected_chromedriver!GetHandleVerifier [0xfeb132+19922]
+	undetected_chromedriver!GetHandleVerifier [0xfd40cf+28bf]
+	KERNEL32!BaseThreadInitThunk [0x7625fcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f839e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f836e+ee]
+
+2026-03-30 07:32:13,638 - bot - INFO - Trying fallback with regular Selenium Chrome driver...
+2026-03-30 07:32:13,639 - WDM - INFO - ====== WebDriver manager ======
+2026-03-30 07:32:20,300 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2026-03-30 07:32:24,840 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2026-03-30 07:32:26,402 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2026-03-30 07:33:30,791 - WDM - INFO - WebDriver version 146.0.7680.165 selected
+2026-03-30 07:33:30,805 - WDM - INFO - Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/146.0.7680.165/win32/chromedriver-win32.zip
+2026-03-30 07:33:30,805 - WDM - INFO - About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/146.0.7680.165/win32/chromedriver-win32.zip
+2026-03-30 07:33:49,316 - WDM - INFO - Driver downloading response is 200
+2026-03-30 07:36:27,155 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2026-03-30 07:36:29,846 - WDM - INFO - Driver has been saved in cache [C:\Users\qasim\.wdm\drivers\chromedriver\win64\146.0.7680.165]
+2026-03-30 07:36:34,586 - bot - INFO - Chrome driver created successfully with regular Selenium
+2026-03-30 07:36:34,589 - scraper - INFO - Starting Google scrape for USA: https://www.google.com/search?q=site%3Alinkedin.com%2Fin+%28%22HR+Manager%22+OR+…
+2026-03-30 07:37:11,053 - scraper - INFO - Scraping page 1
+2026-03-30 07:37:12,317 - database - INFO - Bulk insert into 'usa_google_connections': 0 new profiles
+2026-03-30 07:37:12,318 - scraper - INFO - Page 1: found 10 profiles, 0 new
+2026-03-30 07:37:36,495 - scraper - INFO - Scraping page 2
+2026-03-30 07:37:37,541 - database - INFO - Bulk insert into 'usa_google_connections': 0 new profiles
+2026-03-30 07:37:37,542 - scraper - INFO - Page 2: found 10 profiles, 0 new
+2026-03-30 07:37:55,725 - scraper - INFO - Scraping page 3
+2026-03-30 07:37:56,600 - database - INFO - Bulk insert into 'usa_google_connections': 1 new profiles
+2026-03-30 07:37:56,601 - scraper - INFO - Page 3: found 10 profiles, 1 new
+2026-03-30 07:38:18,062 - scraper - INFO - Scraping page 4
+2026-03-30 07:38:19,121 - database - INFO - Bulk insert into 'usa_google_connections': 2 new profiles
+2026-03-30 07:38:19,121 - scraper - INFO - Page 4: found 10 profiles, 2 new
+2026-03-30 07:38:49,215 - scraper - INFO - Scraping page 5
+2026-03-30 07:38:50,368 - database - INFO - Bulk insert into 'usa_google_connections': 4 new profiles
+2026-03-30 07:38:50,368 - scraper - INFO - Page 5: found 10 profiles, 4 new
+2026-03-30 07:39:26,343 - utils.human_behavior - ERROR - Navigation error to https://www.google.com/search?q=site:linkedin.com/in+(%22HR+Manager%22+OR+%22Talent+Acquisition%22)+(%22CEO%22+OR+%22FinTech%22+OR+%22CTO%22)+%22USA%22&sca_esv=d9f24a9a5aa894d8&rlz=1C1CHBF_en-GBPK1159PK1159&ei=5orKaayHLcq6i-gPnbjFuA0&start=50&sa=N&sstk=Af77f_crPuvX46vnSxj3g4VOQIGo94LsZvNZfpWb4ZDi4ApQh2_UWgJ3mNeDTFJYKcB77Ng5VoGDjjyzvN1Q10IbAD-UQ39R0-UNBxVasMiJdbR786RZFnR4uFQXSziEuiKJs7cD0KxbGI7zF9Ldw9pur-S2fD36bVCgqaK0_8_wUngGdt3bRunBLAkTrhTlx5WYwhQGdGJpU2_5HC8Zn4Pi2Zw4voZ-&ved=2ahUKEwiskt3v7MeTAxVK3QIHHR1cEdc4KBDw0wN6BAgIEBc: Message: timeout: Timed out receiving message from renderer: 13.493
+  (Session info: chrome=146.0.7680.165)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xfecdf3+10b03]
+	chromedriver!GetHandleVerifier [0xfecf24+10c34]
+	chromedriver!(No symbol) [0xdd2120]
+	chromedriver!(No symbol) [0xdc24b3]
+	chromedriver!(No symbol) [0xdc21e5]
+	chromedriver!(No symbol) [0xdc02f8]
+	chromedriver!(No symbol) [0xdc0b46]
+	chromedriver!(No symbol) [0xdcd9cb]
+	chromedriver!(No symbol) [0xddf76e]
+	chromedriver!(No symbol) [0xde51d6]
+	chromedriver!(No symbol) [0xdc11cc]
+	chromedriver!(No symbol) [0xddf4e2]
+	chromedriver!(No symbol) [0xe5acba]
+	chromedriver!(No symbol) [0xe3d8a6]
+	chromedriver!(No symbol) [0xe10229]
+	chromedriver!(No symbol) [0xe10fe4]
+	chromedriver!GetHandleVerifier [0x12548b9+2785c9]
+	chromedriver!GetHandleVerifier [0x124feb5+273bc5]
+	chromedriver!GetHandleVerifier [0x126e06b+291d7b]
+	chromedriver!GetHandleVerifier [0x1005cc8+299d8]
+	chromedriver!GetHandleVerifier [0x100d9fd+3170d]
+	chromedriver!GetHandleVerifier [0xff58c8+195d8]
+	chromedriver!GetHandleVerifier [0xff5a92+197a2]
+	chromedriver!GetHandleVerifier [0xfdee9a+2baa]
+	KERNEL32!BaseThreadInitThunk [0x7625fcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f839e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x779f836e+ee]
+
+2026-03-30 07:39:30,374 - scraper - INFO - Google scraping completed for USA. Total new profiles: 7
+2026-03-30 07:40:27,029 - __main__ - INFO - Received signal 2, shutting down gracefully...
+2026-03-30 07:40:27,032 - __main__ - INFO - Shutting down automation system...
+2026-03-30 07:40:27,034 - scheduler - INFO - Scheduler stopped
+2026-03-30 07:40:27,036 - scheduler - INFO - Automation system stopped
+2026-03-30 07:40:27,041 - database - INFO - Database connection closed
+2026-03-30 07:40:27,046 - __main__ - INFO - Shutdown complete

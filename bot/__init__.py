@@ -60,75 +60,162 @@ class DriverManager:
             self.close_driver()
         headless = headless if headless is not None else config.HEADLESS_MODE
         try:
-            options = uc.ChromeOptions()
-            stealth_args = [
-                "--disable-blink-features=AutomationControlled",
-                "--disable-infobars",
-                "--no-sandbox",
-                "--disable-dev-shm-usage",
-                "--disable-gpu",
-                "--disable-notifications",
-                "--ignore-certificate-errors",
-                "--disable-popup-blocking",
-                "--disable-extensions",
-                "--log-level=3",
-                "--disable-features=VizDisplayCompositor",
-                "--no-first-run",
-                "--password-store=basic",
-                "--disable-web-security",
-                "--allow-running-insecure-content",
-                "--disable-background-timer-throttling",
-                "--disable-backgrounding-occluded-windows",
-                "--disable-renderer-backgrounding",
-            ]
-
-            for arg in stealth_args:
-                options.add_argument(arg)
-            options.add_argument(
-                f"--window-size={config.WINDOW_SIZE[0]},{config.WINDOW_SIZE[1]}"
-            )
-            if headless:
-                options.add_argument("--headless=new")
-            else:
-                options.add_argument("--start-maximized")
-            user_agent = os.getenv(
-                "CHROME_USER_AGENT",
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-            )
-            options.add_argument(f"--user-agent={user_agent}")
-            options.add_experimental_option(
-                "prefs",
-                {
-                    "credentials_enable_service": False,
-                    "profile.password_manager_enabled": False,
-                    "profile.default_content_setting_values.notifications": 2,
-                    "profile.default_content_settings.popups": 0,
-                    "download.prompt_for_download": False,
-                    "download.directory_upgrade": True,
-                    "safebrowsing.enabled": True,
-                },
-            )
-            options.add_experimental_option("excludeSwitches", ["enable-automation"])
-            options.add_experimental_option("useAutomationExtension", False)
-            _ver_env = os.getenv("CHROME_DRIVER_VERSION", "").strip()
-            chrome_version = int(_ver_env) if _ver_env.isdigit() else None
-            self.driver = uc.Chrome(version_main=chrome_version, options=options)
-            self.driver.execute_script(
-                "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
-            )
-            self.driver.execute_cdp_cmd(
-                "Network.setUserAgentOverride", {"userAgent": user_agent}
-            )
-            if not headless:
-                self.driver.maximize_window()
-            self.driver.set_page_load_timeout(30)
-            self._load_cookies()
-            self.session_active = True
-            logger.info("Chrome driver created successfully with anti-detection")
-            return self.driver
+            return self._create_undetected_driver(headless)
         except Exception as e:
-            logger.error(f"Failed to create Chrome driver: {e}")
-            raise
+            logger.warning(f"Undetected Chrome driver failed: {e}")
+            logger.info("Trying fallback with regular Selenium Chrome driver...")
+            try:
+                return self._create_regular_driver(headless)
+            except Exception as e2:
+                logger.error(
+                    f"Both driver methods failed. Undetected: {e}, Regular: {e2}"
+                )
+                raise Exception(f"Failed to create Chrome driver with both methods")
+
+    # -------------------------------------
+    # :: Create undetected Driver Method
+    # -------------------------------------
+
+    """ 
+    Creates a stealth **undetected Chrome driver** configured to avoid bot detection.
+    """
+
+    def _create_undetected_driver(self, headless=None):
+        options = uc.ChromeOptions()
+        stealth_args = [
+            "--disable-blink-features=AutomationControlled",
+            "--disable-infobars",
+            "--no-sandbox",
+            "--disable-dev-shm-usage",
+            "--disable-gpu",
+            "--disable-notifications",
+            "--ignore-certificate-errors",
+            "--disable-popup-blocking",
+            "--disable-extensions",
+            "--log-level=3",
+            "--disable-features=VizDisplayCompositor",
+            "--no-first-run",
+            "--password-store=basic",
+            "--disable-web-security",
+            "--allow-running-insecure-content",
+            "--disable-background-timer-throttling",
+            "--disable-backgrounding-occluded-windows",
+            "--disable-renderer-backgrounding",
+        ]
+        for arg in stealth_args:
+            options.add_argument(arg)
+        options.add_argument(
+            f"--window-size={config.WINDOW_SIZE[0]},{config.WINDOW_SIZE[1]}"
+        )
+        if headless:
+            options.add_argument("--headless=new")
+        else:
+            options.add_argument("--start-maximized")
+        user_agent = os.getenv(
+            "CHROME_USER_AGENT",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+        )
+        options.add_argument(f"--user-agent={user_agent}")
+        options.add_experimental_option(
+            "prefs",
+            {
+                "credentials_enable_service": False,
+                "profile.password_manager_enabled": False,
+                "profile.default_content_setting_values.notifications": 2,
+                "profile.default_content_settings.popups": 0,
+                "download.prompt_for_download": False,
+                "download.directory_upgrade": True,
+                "safebrowsing.enabled": True,
+            },
+        )
+        _ver_env = os.getenv("CHROME_DRIVER_VERSION", "").strip()
+        chrome_version = int(_ver_env) if _ver_env.isdigit() else None
+        self.driver = uc.Chrome(version_main=chrome_version, options=options)
+        self.driver.execute_script(
+            "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+        )
+        self.driver.execute_cdp_cmd(
+            "Network.setUserAgentOverride", {"userAgent": user_agent}
+        )
+        if not headless:
+            self.driver.maximize_window()
+        self.driver.set_page_load_timeout(30)
+        self._load_cookies()
+        self.session_active = True
+        logger.info("Chrome driver created successfully with undetected_chromedriver")
+        return self.driver
+
+    # --------------------------------
+    # :: Create Regular Method
+    # --------------------------------
+
+    """ 
+    Creates a standard Selenium Chrome driver with stealth settings and basic anti-detection tweaks.
+    """
+
+    def _create_regular_driver(self, headless):
+        from selenium.webdriver.chrome.service import Service
+        from webdriver_manager.chrome import ChromeDriverManager
+
+        options = webdriver.ChromeOptions()
+        stealth_args = [
+            "--disable-blink-features=AutomationControlled",
+            "--disable-infobars",
+            "--no-sandbox",
+            "--disable-dev-shm-usage",
+            "--disable-gpu",
+            "--disable-notifications",
+            "--ignore-certificate-errors",
+            "--disable-popup-blocking",
+            "--disable-extensions",
+            "--log-level=3",
+            "--disable-features=VizDisplayCompositor",
+            "--no-first-run",
+            "--password-store=basic",
+            "--disable-web-security",
+            "--allow-running-insecure-content",
+            "--disable-background-timer-throttling",
+            "--disable-backgrounding-occluded-windows",
+            "--disable-renderer-backgrounding",
+        ]
+        for arg in stealth_args:
+            options.add_argument(arg)
+        options.add_argument(
+            f"--window-size={config.WINDOW_SIZE[0]},{config.WINDOW_SIZE[1]}"
+        )
+        if headless:
+            options.add_argument("--headless=new")
+        else:
+            options.add_argument("--start-maximized")
+        user_agent = os.getenv(
+            "CHROME_USER_AGENT",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+        )
+        options.add_argument(f"--user-agent={user_agent}")
+        options.add_experimental_option(
+            "prefs",
+            {
+                "credentials_enable_service": False,
+                "profile.password_manager_enabled": False,
+                "profile.default_content_setting_values.notifications": 2,
+                "profile.default_content_settings.popups": 0,
+                "download.prompt_for_download": False,
+                "download.directory_upgrade": True,
+                "safebrowsing.enabled": True,
+            },
+        )
+        service = Service(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=service, options=options)
+        self.driver.execute_script(
+            "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+        )
+        if not headless:
+            self.driver.maximize_window()
+        self.driver.set_page_load_timeout(30)
+        self._load_cookies()
+        self.session_active = True
+        logger.info("Chrome driver created successfully with regular Selenium")
+        return self.driver
 
     # --------------------------------
     # :: Load Cookies Method

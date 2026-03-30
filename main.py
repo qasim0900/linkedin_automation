@@ -699,12 +699,25 @@ def main():
         help="Run mode: interactive (CLI) or daemon (background)",
     )
     parser.add_argument("--config", help="Path to configuration file")
+    parser.add_argument("--init-db", action="store_true", help="Initialize MongoDB database")
     args = parser.parse_args()
     cli = LinkedInAutomationCLI()
     cli.setup_signal_handlers()
 
     try:
         config.validate_config()
+
+        if args.init_db:
+            print("Initializing MongoDB database...")
+            from database_init import DatabaseInitializer
+            initializer = DatabaseInitializer()
+            success = initializer.initialize_database()
+            if success:
+                print("✅ Database initialization completed successfully!")
+                sys.exit(0)
+            else:
+                print("❌ Database initialization failed!")
+                sys.exit(1)
 
         if args.mode == "interactive":
             cli.start_interactive_mode()
